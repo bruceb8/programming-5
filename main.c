@@ -1,9 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "pr5.h"
+
 
 int main() {
 	int input = -1;
+	FILE* ptrF = fopen("animals.dat", "rb+");
 	while(input != 0) {
 		printf("Please enter a number between 1 and 5 for operations and 0 to exit\n");
 		scanf("%d", &input);
@@ -13,11 +16,27 @@ int main() {
 			scanf("%d", &input);
 			while(getchar() != '\n') {;}
 		}
-		printf("%d\n", input);
+		if(input == 1) {
+			toString(ptrF);
+		} else if(input == 2) {
+			input2(ptrF);
+		}else if(input == 3) {
+			input3(ptrF);
+		}else if(input ==4) {
+			updateAnimal(ptrF);
+		}else if(input == 5) {
+			input5(ptrF);
+		}
 	}
-	printf("YEEAAAAAH BOUIIIIIII");
+	
+	
 
+	printCSV(ptrF);
+	
+	printf("YEEAAAAAH BOUIIIIIII");
+	fclose(ptrF);
 	
 
 	return 1;
 }
+
