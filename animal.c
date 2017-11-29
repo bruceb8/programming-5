@@ -5,6 +5,7 @@
 #include "pr5.h"
 
 #pragma pack(1)
+//Definition of the animal object.
 struct animal {
 	short int id;
 	char name[20];
@@ -12,10 +13,23 @@ struct animal {
 	char size;
 	short int age;
 };
+//Function printAnimal() prints the animal object's attibutes.
+//
+//PRE: Function takes in an object of type Animal to print it's 
+//attributes to the console.
+//
+//POST: none
 
 void printAnimal(Animal theAnimal) {
 		printf("%hd,%s,%s,%c,%hd\n", theAnimal->id, theAnimal->name, theAnimal->species, theAnimal->size, theAnimal->age);
 }
+//Function toString() takes in a binary file byte by byte and compares each byte's decimal equivalent to 
+//see if it falls within the range of 32-127. If so the ASCII equivalent char is printed if not a space
+//is printed.
+//
+//PRE: the Function takes in a pointer pointing to the file to be read.
+//
+//POST: none.
 
 void toString(FILE* theFilePtr) {
     int count = 0;
@@ -33,7 +47,9 @@ void toString(FILE* theFilePtr) {
         count++;
 	}
 }
-
+//Takes in a file pointer and reads the file as a set of 4 byte ints
+//pre: takes a file ptr to an existing binary file animalbin.dat
+//post: none
 void input2(FILE* ptrF) {
 	fseek(ptrF, 0, SEEK_END);
 	int size = ftell(ptrF);
@@ -50,7 +66,10 @@ void input2(FILE* ptrF) {
 	printf("\n");
 	rewind(ptrF);
 }
-
+//Searches the binary file based on a sorted list of ID values and prints the
+//animal associated with that ID
+//pre: animal.dat is a sorted lists of animal data structures
+//post: none
 void input3(FILE* ptrF) {
 	//printf("WOW WE IN");
 	//printf("%d", sizeof(struct animal));
@@ -78,6 +97,14 @@ void input3(FILE* ptrF) {
 	free(tempAn);
 
 }
+//Function updateAnimal() prompts the user for an animal ID. The function then skips to that ID number's information 
+//and prompts the user to update the animal's information.
+//
+//PRE: the function takes in a pointer pointing to the file to be updated. This is like passing a parameter by reference.
+//The user is promted to enter an animal's ID number. The function will use the ID number to find the animal's information,
+//and then the user will be prompted again to update that information. 
+//
+//POST: the function updates the animal's information
 
 void updateAnimal(FILE* theFilePtr) {
     short int ID;
@@ -123,7 +150,10 @@ void updateAnimal(FILE* theFilePtr) {
     
     free(thing);
 }
-
+//Deletes the specified animal struct if it exists and truncates the file
+//to accomodate the shrunken data file
+//pre: sorted by ID list of animal structs
+//post: a smaller list with the specified element deleted
 void input5(FILE* ptrF) {
 	short int idSearch;
 	printf("Enter the ID you want to delete:\n");
@@ -156,7 +186,9 @@ void input5(FILE* ptrF) {
 	
 }
 
-
+//prints the binary file of animal structs to a csv file
+//pre: the file exists
+//post: none
 void printCSV(FILE* ptrF){
 	FILE* fileX = fopen("animals.csv", "w");
 	fseek(ptrF, 0, SEEK_END);
