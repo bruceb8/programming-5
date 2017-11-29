@@ -105,10 +105,10 @@ void updateAnimal(FILE* theFilePtr) {
 	
     fseek(theFilePtr, ((ID - 1) * sizeof(struct animal)), SEEK_SET);
     printf("Update the animal's name.");
-    scanf("%s", thing->name);
+    scanf("%[^\n]", thing->name);
 	while(getchar() != '\n') {;}
     printf("Update the animal's species.");
-    scanf("%s", thing->species);
+    scanf("%[^\n]", thing->species);
 	while(getchar() != '\n') {;}
     printf("Update the animal's size.");
     scanf("%c", &(thing->size));
