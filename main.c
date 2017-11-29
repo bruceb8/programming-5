@@ -33,7 +33,7 @@ int main() {
 
 	printCSV(ptrF);
 	
-	printf("YEEAAAAAH BOUIIIIIII");
+	//printf("YEEAAAAAH BOUIIIIIII");
 	fclose(ptrF);
 	
 
